@@ -3,7 +3,7 @@
 import os
 import requests
 
-feed_store = []
+feed_dict = {}
 
 for file in os.listdir():
     if file.endswith(".txt"):
@@ -12,12 +12,14 @@ for file in os.listdir():
             for line in file_in:
                 lines.append(line.rstrip())
 
-            title = lines[0]
-            name = lines[1]
-            date = lines[2]
-            feedback = lines[3]
-            print(title)
+            feed_dict["title"] = lines[0]
+            feed_dict["name"] = lines[1]
+            feed_dict["date"] = lines[2]
+            feed_dict["feedback"] = lines[3]
 
+        print(feed_dict)
 
-#print(lines)
-#print(name)
+        if response.ok is "False":
+            raise Exception("POST failed with status code {}".format(response.status_code))
+        else:
+            print("Added feedback successfully to the website !!!")    
