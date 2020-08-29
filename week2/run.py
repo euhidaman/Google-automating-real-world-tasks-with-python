@@ -1,13 +1,14 @@
-#ryt now, this program prints only title of each file, modify it make a dictionary, and store the necessary values of all the files in it.
+# make sure to write this script in the home directory.
+# to go to home directory, use the command --> cd ~
 
 import os
 import requests
 
+path = '/data/feedback/'
 feed_dict = {}
 
 for file in os.listdir():
-    if file.endswith(".txt"):
-        with open(file) as file_in:
+    with open(path + file) as file_in:
             lines = []
             for line in file_in:
                 lines.append(line.rstrip())
@@ -19,7 +20,9 @@ for file in os.listdir():
 
         print(feed_dict)
 
+        response = requests.post("http://34.121.110.232/feedback/", json = feed_dict)
+
         if response.ok is "False":
             raise Exception("POST failed with status code {}".format(response.status_code))
         else:
-            print("Added feedback successfully to the website !!!")    
+            print("Added feedback successfully to the website !!!")
