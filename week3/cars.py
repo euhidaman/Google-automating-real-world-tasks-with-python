@@ -72,14 +72,14 @@ def cars_dict_to_table(car_data):
 
 def main(argv):
     """Process the JSON data and generate a full report out of it."""
-    data = load_data("/home/<student-04-2ff4b6f547a7>/car_sales.json")
+    data = load_data("/home/<your-username>/car_sales.json")
     summary = process_data(data)
     new_summary = '<br/>'.join(summary)
     print(summary)
     # TODO: turn this into a PDF report
     report('/tmp/cars.pdf', "Cars report", new_summary, cars_dict_to_table(data))
     # TODO: send the PDF report as an email attachment
-    msg = email_generate("automation@example.com", "<student-04-2ff4b6f547a7>@example.com",
+    msg = email_generate("automation@example.com", "<your-username>@example.com",
                          "Sales summary for last month", new_summary, "/tmp/cars.pdf")
     email_send(msg)
 
